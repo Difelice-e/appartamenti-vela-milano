@@ -1,0 +1,216 @@
+/* =========================================================================
+   Appartamenti Vela Milano — Design Tokens (CSS custom properties)
+   Source: brand/guide.md v1.0 — Phase 1
+   Tier: Plus (Next.js + React + Framer Motion)
+   ========================================================================= */
+
+:root {
+  /* -----------------------------------------------------------------------
+     1. COLOR
+     ----------------------------------------------------------------------- */
+
+  /* Core palette */
+  --color-primary: #3A7D44;
+  --color-primary-hover: #2F6939;
+  --color-primary-pressed: #285B31;
+
+  --color-secondary: #F6F4EC;
+  --color-white: #FFFFFF;
+
+  --color-accent: #D9B382;
+  --color-accent-hover: #CEA373;
+
+  --color-neutral-dark: #1F2A24;
+
+  /* State */
+  --color-success: #3A7D44;
+  --color-warning: #C68B4A;
+  --color-error: #B2453A;
+
+  /* Dividers & overlays */
+  --color-divider-soft: rgba(31, 42, 36, 0.08);
+  --color-divider-strong: rgba(31, 42, 36, 0.18);
+
+  /* Text opacity tiers (use on --color-neutral-dark) */
+  --text-opacity-primary: 1;
+  --text-opacity-secondary: 0.75;
+  --text-opacity-min: 0.55;
+
+  /* -----------------------------------------------------------------------
+     2. LIQUID GLASS
+     ----------------------------------------------------------------------- */
+
+  --glass-bg-light: rgba(255, 255, 255, 0.55);
+  --glass-bg-on-photo: rgba(246, 244, 236, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-blur: 40px;
+  --glass-blur-photo: 48px;
+  --glass-saturate: 180%;
+  --glass-saturate-photo: 200%;
+  --glass-highlight-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 12px 48px rgba(31, 42, 36, 0.12);
+  --glass-fallback-bg: #F6F4EC;
+  --glass-fallback-shadow: 0 8px 32px rgba(31, 42, 36, 0.10);
+
+  /* -----------------------------------------------------------------------
+     3. TYPOGRAPHY
+     ----------------------------------------------------------------------- */
+
+  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Fluid type scale (mobile → desktop via clamp) */
+  --fs-display-xl: clamp(44px, 7vw, 72px);
+  --fs-display-l: clamp(36px, 5.5vw, 56px);
+  --fs-h1: clamp(30px, 4.5vw, 44px);
+  --fs-h2: clamp(24px, 3.5vw, 32px);
+  --fs-h3: 20px;
+  --fs-body-l: clamp(16px, 1.6vw, 18px);
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  /* Line heights */
+  --lh-display-xl: 1.05;
+  --lh-display-l: 1.08;
+  --lh-h1: 1.1;
+  --lh-h2: 1.15;
+  --lh-h3: 1.3;
+  --lh-body: 1.55;
+  --lh-small: 1.5;
+  --lh-micro: 1.4;
+
+  /* Letter spacing */
+  --ls-display-xl: -0.02em;
+  --ls-display-l: -0.015em;
+  --ls-h1: -0.012em;
+  --ls-h2: -0.01em;
+  --ls-tight: 0;
+  --ls-micro-upper: 0.08em;
+  --ls-nav-link: 0.04em;
+
+  /* -----------------------------------------------------------------------
+     4. SPACING (base 4px)
+     ----------------------------------------------------------------------- */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
+
+  /* Section vertical rhythm */
+  --section-py-desktop: 140px; /* 120–160 window */
+  --section-py-mobile: 90px;   /* 80–100 window */
+
+  /* -----------------------------------------------------------------------
+     5. LAYOUT
+     ----------------------------------------------------------------------- */
+
+  --container-max: 1200px;
+  --container-hero-max: 1280px;
+
+  --grid-cols-desktop: 12;
+  --grid-cols-tablet: 8;
+  --grid-cols-mobile: 4;
+  --grid-gutter-desktop: 24px;
+  --grid-gutter-tablet: 20px;
+  --grid-gutter-mobile: 16px;
+
+  /* Navigation height */
+  --nav-h-desktop: 72px;
+  --nav-h-mobile: 64px;
+
+  /* -----------------------------------------------------------------------
+     6. BORDER RADIUS
+     ----------------------------------------------------------------------- */
+
+  --radius-xs: 14px;   /* button, input */
+  --radius-sm: 18px;   /* pill badge */
+  --radius-md: 20px;   /* feature card, glass base */
+  --radius-lg: 24px;   /* hero card */
+  --radius-xl: 28px;   /* hero card large */
+  --radius-pill: 999px;
+
+  /* -----------------------------------------------------------------------
+     7. SHADOWS
+     ----------------------------------------------------------------------- */
+
+  --shadow-card-soft: 0 8px 32px rgba(31, 42, 36, 0.08);
+  --shadow-card-hover: 0 14px 48px rgba(31, 42, 36, 0.14);
+  --shadow-glass: 0 12px 48px rgba(31, 42, 36, 0.12);
+  --shadow-focus-ring: 0 0 0 3px rgba(58, 125, 68, 0.15);
+
+  /* -----------------------------------------------------------------------
+     8. MOTION
+     ----------------------------------------------------------------------- */
+
+  --ease-soft-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear: linear;
+
+  --dur-micro: 200ms;     /* hover micro (button, link) */
+  --dur-card: 400ms;      /* hover card */
+  --dur-reveal: 600ms;    /* scroll reveal */
+  --dur-hero: 1200ms;     /* hero entrance stagger */
+
+  --stagger-delay: 80ms;
+
+  /* -----------------------------------------------------------------------
+     9. BREAKPOINTS (reference — consume in Tailwind/JS)
+     ----------------------------------------------------------------------- */
+
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1440px;
+
+  /* -----------------------------------------------------------------------
+     10. Z-INDEX
+     ----------------------------------------------------------------------- */
+
+  --z-base: 0;
+  --z-sticky-nav: 40;
+  --z-glass-overlay: 50;
+  --z-modal: 90;
+  --z-toast: 100;
+}
+
+/* =========================================================================
+   Accessibility fallbacks
+   ========================================================================= */
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-bg-light: #F6F4EC;
+    --glass-bg-on-photo: #F6F4EC;
+    --glass-border: rgba(31, 42, 36, 0.08);
+    --glass-blur: 0px;
+    --glass-blur-photo: 0px;
+    --glass-saturate: 100%;
+    --glass-saturate-photo: 100%;
+    --glass-shadow: 0 8px 32px rgba(31, 42, 36, 0.10);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 0ms;
+    --dur-card: 0ms;
+    --dur-reveal: 0ms;
+    --dur-hero: 0ms;
+    --stagger-delay: 0ms;
+  }
+}
