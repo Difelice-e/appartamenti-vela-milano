@@ -1,0 +1,286 @@
+# ==============================================================================
+# BRAND INPUT — Appartamenti Vela Milano Centro con Garage
+# ==============================================================================
+# Compilato da: report consulenza + scraping Booking.com + foto fornite
+# Data compilazione: 2026-04-18
+# ==============================================================================
+
+# --- Informazioni Base ---
+name: "Appartamenti Vela Milano"
+slug: "appartamenti-vela-milano"
+type: "appartamenti"              # Short-stay apartments / aparthotel su Booking
+tier: "plus"                      # Richiesto effetto liquid glass + target premium
+                                  # (business, fiere, co-working) => serve Next.js
+
+# --- Localizzazione ---
+locale:
+  language: "it"
+  secondary_languages: []         # DEMO solo IT. In delivery valuteremo con il
+                                  # cliente l'aggiunta di EN (e altre lingue).
+  city: "Milano"
+  province: "MI"
+  region: "Lombardia"
+  country: "IT"
+  neighborhood: "Città Studi / Loreto / Piola"
+  zone_character: "green pocket nel centro di Milano, ben collegato con i mezzi"
+
+# --- Identità Visiva ---
+logo_path: ""                     # Da generare in fase di demo (vedi logo_strategy)
+logo_strategy:
+  type: "wordmark"                # Solo testuale (no simbolo) per la demo
+  content: "Appartamenti Vela Milano"
+  style_direction: >
+    Wordmark elegante e minimale, font display coerente col brand (serif
+    moderno o grotesk raffinato), palette: lettering in verde primario
+    (#3A7D44) o verde scuro (#1F2A24) su sfondo chiaro. Possibile sottile
+    accento cromatico (accent o verde) su una lettera-chiave o sulla parola
+    "Vela" per dare riconoscibilità.
+  notes: >
+    In delivery valuteremo se evolvere in un logo completo con simbolo
+    (vela/foglia/onda) dopo validazione del wordmark con il cliente.
+colors:
+  # Direzione confermata dal cliente per la demo.
+  # In fase di ricerca/delivery valuteremo un accent "legno chiaro / parquet"
+  # al posto del giallo per richiamare direttamente la materia dominante degli interni.
+  primary: "#3A7D44"              # Verde natura (foglia / pianta)
+  secondary: "#F6F4EC"            # Bianco caldo (luminosità, parquet chiaro)
+  accent: "#E8C547"               # Giallo acceso (sole/vetrate) — DEMO
+  neutral_dark: "#1F2A24"         # Verde scurissimo per testi
+  neutral_light: "#FFFFFF"        # Bianco puro per sfondi liquid-glass
+  accent_alternatives_to_research:
+    # Tonalità "legno chiaro / parquet" da esplorare in fase di ricerca come
+    # possibile sostituzione del giallo, per legare l'accent al parquet chiaro.
+    - name: "light oak"
+      hex: "#D9B382"
+    - name: "pale wood"
+      hex: "#C9A87C"
+    - name: "cream wood"
+      hex: "#E6CFA7"
+    - name: "warm oak"
+      hex: "#B8936A"
+    # Alternative cromatiche già considerate (meno prioritarie)
+    - name: "coral"
+      hex: "#E86A4E"
+    - name: "lime"
+      hex: "#B7D84B"
+  palette_notes: |
+    Il cliente ha chiesto: verde natura come base, bianco come respiro,
+    caratteri/headline in un colore acceso per contrastare luminosità degli spazi.
+    Direzione confermata per la demo. In fase di RICERCA/DELIVERY valuteremo
+    la sostituzione dell'accent giallo con una tonalità legno chiaro / parquet
+    (vedi accent_alternatives_to_research) per agganciare l'accent al materiale
+    dominante negli interni. Importante: con liquid glass serve contrasto
+    adeguato su sfondi chiari — verificare leggibilità.
+fonts:
+  display: ""                     # Da definire — suggerito serif elegante + sans moderno
+  body: ""                        # Lasciato vuoto per generazione automatica
+
+# --- Filosofia del Brand ---
+philosophy:
+  mission: >
+    Offrire agli ospiti un'esperienza di soggiorno all'insegna di relax, natura e
+    ospitalità genuina nel centro di Milano, tramite appartamenti luminosi, curati
+    nei dettagli bio e dotati di ogni comfort per turismo slow e business.
+  vision: >
+    Diventare il punto di riferimento a Milano per chi cerca un "green pocket" in
+    città: un rifugio silenzioso e luminoso a due passi dalla frenesia milanese,
+    ideale per viaggi d'affari, fiere, co-working e soggiorni di piacere.
+  values:
+    - "ospitalità personale"      # host presente, attesa fino a mezzanotte per check-in
+    - "sostenibilità"             # prodotti bio, tema green
+    - "natura in città"           # piante, verde, aria pulita
+    - "comfort premium"           # cucine complete, parquet, aree esterne ampie
+    - "sicurezza"                 # garage privato prenotabile
+    - "multiculturalità"          # host parla più lingue
+    - "luminosità"                # grandi vetrate, spazi aperti
+  tone: "accogliente, elegante, naturale, rassicurante — voce calda ma professionale"
+
+# --- Struttura / Inventario unità ---
+units:
+  total: 3
+  typology: "bilocale matrimoniale"
+  configuration: "tutti gli appartamenti sono molto simili tra loro"
+  each_unit_includes:
+    - "camera matrimoniale"
+    - "bagno privato"
+    - "cucina attrezzata"
+    - "salone"
+    - "balcone / area esterna"
+  extra_beds:
+    available: true
+    options: ["letti aggiuntivi", "culle per bambini"]
+  display_strategy: >
+    Mostrare il numero (3 appartamenti) e la possibilità di letti/culle extra,
+    ma NON creare card/sezioni separate per ogni unità — sono simili tra loro
+    e meritano un racconto unico e coerente.
+
+# --- Contenuti ---
+content:
+  tagline: "Un'oasi verde nel cuore di Milano"
+  tagline_alternatives:
+    - "Respira Milano, senza rinunciare al silenzio"
+    - "La tua pausa green nel centro città"
+    - "Natura, luce e comfort — a due passi dal Duomo"
+  description: >
+    Appartamenti Vela Milano è un rifugio luminoso e immerso nel verde nel centro
+    di Milano. Tre appartamenti bilocali matrimoniali, con balconi spaziosi, cucina,
+    salone e bagno privato, accolgono coppie, famiglie (con letti extra e culle),
+    professionisti in trasferta e visitatori in fiera. Ogni appartamento è dotato
+    di cucina attrezzata a induzione, prodotti da bagno 100% bio, accappatoi e
+    finiture in parquet chiaro. Host multilingue, garage privato prenotabile e
+    ottimi collegamenti con i mezzi pubblici completano l'esperienza.
+  services:
+    - "3 appartamenti bilocali matrimoniali, luminosi e con balconi"
+    - "Possibilità di aggiungere letti extra e culle per bambini"
+    - "Ogni appartamento ha bagno privato, cucina e salone"
+    - "Cucine attrezzate con piano a induzione, forno e macchina del caffè"
+    - "Prodotti da bagno 100% bio (shampoo, balsamo, bagnoschiuma)"
+    - "Accappatoi in dotazione in ogni appartamento"
+    - "Garage privato prenotabile a parte"
+    - "Check-in flessibile fino a mezzanotte"
+    - "Host multilingue"
+    - "Spazi ideali per co-working e soggiorni business"
+    - "WiFi gratuito"
+    - "Parquet chiaro e arredi curati nei dettagli"
+  target_audience:
+    primary:
+      - "turismo leisure di coppia (relax in città)"
+      - "professionisti in trasferta / fiere (Rho Fiera, MiCo)"
+      - "digital nomad / co-working"
+    secondary:
+      - "famiglie"
+      - "gruppi di amici"
+
+# --- Contatti ---
+# NOTA: in fase di DEMO usiamo placeholder. I contatti reali verranno forniti
+# dalla proprietaria in fase di delivery. Il numero privato che abbiamo NON
+# deve essere pubblicato sul sito.
+contacts:
+  email: "info@appartamentivelamilano.it"        # PLACEHOLDER demo
+  phone: "+39 000 000 0000"                      # PLACEHOLDER demo
+  whatsapp: "+39 000 000 0000"                   # PLACEHOLDER demo
+  address: "Via Vincenzo Vela, 17, 20133 Milano MI"
+  google_maps_url: ""             # Da generare una volta confermato indirizzo
+  booking_url: "https://www.booking.com/hotel/it/vela-apartments-con-garage.html"
+  placeholder_mode: true          # In delivery sostituire tutti i campi marcati PLACEHOLDER
+  social:
+    instagram: "https://instagram.com/appartamentivelamilano"   # PLACEHOLDER demo
+    facebook: "https://facebook.com/appartamentivelamilano"     # PLACEHOLDER demo
+    linkedin: ""
+    tiktok: ""
+    youtube: ""
+
+# --- Orari Check-in / Check-out (da Booking) ---
+hours:
+  check_in: "12:00–23:59"
+  check_out: "01:00–10:00"
+  reception: "24h (su richiesta / su appuntamento)"
+  note: "L'host è disponibile anche oltre l'orario standard su richiesta"
+
+# --- Riconoscimenti / Social Proof ---
+reputation:
+  booking_rating: 9.2
+  booking_reviews_count: 678
+  location_score: 8.8
+  highlights:
+    - "Top-rated area in Milan"
+    - "Recentemente ristrutturato"
+    - "Colazione italiana inclusa"
+
+# --- Punti di interesse / distanze ---
+points_of_interest:
+  metro_piola: "400 m"
+  stazione_centrale_milano: "1.5 km"
+  stazione_lambrate: "18 min a piedi"
+  aeroporto_linate: "5 mi (~8 km)"
+  duomo_milano: "~3.5 km"
+  teatro_alla_scala: "2.8 km"
+  parco_sempione: "~10 min auto"
+  gam_milano: "1.7 mi (~2.7 km)"
+
+# --- Richieste Aggiuntive ---
+extra_requests: |
+  TEMA E STILE
+  - Tema sito CHIARO (light mode primario).
+  - Effetto LIQUID GLASS (frosted/blurred translucent surfaces) sugli elementi
+    principali: hero, card appartamenti, navbar, CTA.
+  - Estetica luminosa e ariosa — molti whitespace, tipografia grande.
+  - Palette green-nature con bianco dominante e accento acceso.
+
+  FUNZIONALITÀ RICHIESTE
+  - Form di raccolta email per preventivi / richieste di prenotazione
+    (lead-gen verso la proprietaria, NON integrazione diretta con Booking).
+  - Sezione dedicata al GARAGE prenotabile a parte — è un fattore distintivo.
+  - Sezione "Green & Bio" che racconti i prodotti bio e la filosofia natura.
+  - Galleria foto con focus su: balconi, vetrate, luminosità, parquet chiaro,
+    cucine attrezzate, prodotti bio.
+  - Sezione Business / Co-working / Fiere con CTA dedicata.
+  - DEMO solo IT. Architettura dei testi deve però restare multilingua-ready
+    (es: i18n-friendly) perché in delivery valuteremo l'aggiunta di EN (e
+    potenzialmente FR/DE/ES) insieme al cliente.
+
+  ELEMENTI DA EVIDENZIARE
+  - Ospitalità personale della proprietaria (attesa fino a mezzanotte).
+  - Posizione "green pocket" nel centro di Milano.
+  - Cucine complete (induzione, forno, macchina caffè).
+  - Parquet chiaro come elemento visivo.
+  - Sicurezza del garage privato.
+  - Collegamenti con i mezzi pubblici.
+
+  ASSET DA PRODURRE / RECUPERARE
+  - Foto aeree / drone NON disponibili. Per la DEMO si lavora esclusivamente
+    con le 2 foto esterne già in brand_asset/ (esterno_1.jpg, esterno_2.jpg).
+    Per il DELIVERY l'opportunità di uno shooting drone sarà valutata insieme
+    al cliente.
+  - Logo: da generare in fase di demo come WORDMARK testuale
+    (vedi `logo_strategy` più sopra nel file).
+  - Testi: per la DEMO generiamo copy CREATIVO con storytelling ricco e
+    personalità (massimo impatto commerciale). In DELIVERY la proprietaria
+    valida/modifica e si fanno eventuali revisioni.
+
+  COPY STRATEGY (demo)
+  - Tono: caldo, evocativo, sensoriale ("respira", "luce", "silenzio", "cura").
+  - Storytelling sull'host: ospitalità personale, accoglienza multilingue,
+    flessibilità check-in tardivo come gesto di cura.
+  - Storytelling sugli spazi: "green pocket", parquet chiaro, balconi che
+    si aprono sul verde, cucine per sentirsi a casa, prodotti bio come
+    estensione della filosofia natura.
+  - Micro-copy su CTA evocativo ("Pianifica la tua pausa verde", "Chiedi
+    disponibilità", "Prenota il tuo angolo di silenzio").
+
+# --- Riferimenti ---
+references:
+  liked: []                       # Non forniti dal cliente
+  disliked: []
+
+# --- Asset Forniti ---
+assets:
+  logo: false
+  photos: true                    # 21 foto in brand_asset/ (vedi inventory sotto)
+  copy: false
+  brand_manual: false
+  photos_inventory:
+    balcone: ["balcone_1.jpg", "balcone_2.jpg"]
+    bagni: ["bagni_1.jpg", "bagni_2.jpg"]
+    camere: ["camere_1.jpg", "camere_2.jpg", "camere_3.jpg",
+             "camere_4.jpg", "camere_5.jpg", "camere_6.jpg"]
+    colazione: ["colazione_1.jpg"]
+    cucina: ["cucina_1.jpg", "cucina_2.jpg", "cucina_3.jpg", "cucina_4.jpg"]
+    esterno: ["esterno_1.jpg", "esterno_2.jpg"]
+    soggiorno: ["soggiorno_1.jpg", "soggiorno_2.jpg"]
+  photos_missing:
+    - "Foto aeree / drone del condominio (NON in demo — valutazione in delivery)"
+    - "Foto dettaglio prodotti bio"
+    - "Foto host / ritratto ospitalità (opzionale)"
+
+# --- Note interne (non per generazione sito) ---
+internal_notes:
+  open_questions:
+    - "Contatti reali (email/telefono/WhatsApp) pubblici da ottenere in delivery —
+       in demo si usano placeholder. Il numero privato della proprietaria NON va
+       pubblicato."
+    - "Profili social: da verificare in delivery. Attualmente nessun dato → si
+       usano placeholder IG + FB (gli altri social restano disabilitati)."
+  see_also:
+    - "brand_asset/consulenza_report.txt (trascrizione call commerciale)"
+    - "brand_asset/notes.md (appunti aggiuntivi e TODO)"
