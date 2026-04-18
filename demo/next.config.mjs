@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
+const repoBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const nextConfig = {
+  output: 'export',
+  reactStrictMode: true,
+  trailingSlash: true,
+  basePath: repoBasePath,
+  assetPrefix: repoBasePath || undefined,
   images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [375, 640, 768, 1024, 1280, 1440, 1920],
+    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

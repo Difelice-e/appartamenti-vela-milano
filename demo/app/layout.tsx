@@ -1,43 +1,40 @@
-import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Fraunces, Inter } from 'next/font/google';
+import './globals.css';
 
 const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = {
-  title: "Appartamenti Vela Milano — Un'oasi verde nel cuore di Milano",
+  title: 'Appartamenti Vela Milano — Un\'oasi verde nel cuore di Milano',
   description:
-    "Tre appartamenti bilocali luminosi a Loreto / Piola, 400m dalla metro. Balconi, cucine complete, prodotti bio, garage privato. Host multilingue, check-in fino a mezzanotte.",
+    'Tre appartamenti luminosi a 400 m dalla metro Piola. Parquet chiaro, balconi con piante, cucine attrezzate, garage privato. 9.2/10 su Booking.',
+  metadataBase: new URL('https://appartamentivelamilano.it'),
   openGraph: {
-    title: "Appartamenti Vela Milano",
-    description: "Un'oasi verde nel cuore di Milano — Loreto / Piola",
-    images: ["/photos/esterno_1.jpg"],
-    locale: "it_IT",
-    type: "website",
+    title: 'Appartamenti Vela Milano',
+    description: 'Il green pocket di Milano — abiti il verde a 400 m dalla metro Piola.',
+    images: ['/photos/esterno_1.jpg'],
+    locale: 'it_IT',
+    type: 'website',
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

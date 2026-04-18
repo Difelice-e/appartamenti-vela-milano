@@ -1,78 +1,94 @@
-"use client";
+'use client';
 
-import { Star } from "@phosphor-icons/react/dist/ssr";
-import SectionLabel from "./ui/SectionLabel";
-import RevealSection from "./ui/RevealSection";
-import GlassPanel from "./ui/GlassPanel";
-import BookingBadge from "./ui/BookingBadge";
+import { motion, useReducedMotion } from 'framer-motion';
+import { Star, Quotes } from '@phosphor-icons/react/dist/ssr';
+import { SectionLabel } from './ui/SectionLabel';
+import { BookingBadge } from './ui/BookingBadge';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
 const reviews = [
   {
     quote:
-      "Appartamento luminosissimo, tutto esattamente come descritto. L'host ci ha aspettati dopo mezzanotte senza problemi — un gesto che non dimentico.",
-    name: "Marco R.",
-    country: "Italia",
-    date: "Feb 2026",
-    rating: 5,
+      'Appartamento luminosissimo, tutto come descritto. L\'host ci ha aspettati dopo mezzanotte senza problemi.',
+    name: 'Marco R.',
+    country: 'Italia',
+    date: 'Feb 2026',
   },
   {
     quote:
-      "Clean, bright and perfectly located. The private garage was a game changer — we arrived by car and explored the city entirely on foot.",
-    name: "Sarah T.",
-    country: "United Kingdom",
-    date: "Gen 2026",
-    rating: 5,
+      'Clean, bright and perfectly located. The private garage was a game changer for our stay.',
+    name: 'Sarah T.',
+    country: 'UK',
+    date: 'Jan 2026',
   },
   {
     quote:
-      "Cuisine équipée impeccable, linge de maison de qualité. L'hôte est très réactif et la literie est excellente. On revient à coup sûr.",
-    name: "Claire M.",
-    country: "France",
-    date: "Mar 2026",
-    rating: 5,
+      'Cuisine équipée impeccable, linge de maison de qualité. Hôte très réactif, très pro.',
+    name: 'Claire M.',
+    country: 'France',
+    date: 'Mar 2026',
   },
 ];
 
-export default function Recensioni() {
+export function Recensioni() {
+  const reduced = useReducedMotion();
+
   return (
-    <section id="recensioni" className="section-py bg-white">
-      <div className="container-brand">
-        <RevealSection className="text-center mb-14">
-          <SectionLabel>Voci degli ospiti</SectionLabel>
-          <h2 className="heading-h2 text-neutral-dark mb-5 text-balance">
-            Lo dicono i nostri ospiti
-          </h2>
-          <BookingBadge />
-        </RevealSection>
+    <section className="section-py bg-white">
+      <div className="container-vela">
+        <motion.div
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.6, ease: EASE_SOFT_OUT }}
+          className="flex flex-wrap items-end justify-between gap-6"
+        >
+          <div className="max-w-[560px]">
+            <SectionLabel>Voci degli ospiti</SectionLabel>
+            <h2 className="mt-4 font-display text-h1 font-medium leading-[1.1] tracking-[-0.012em] text-ink">
+              <span className="italic text-primary">9.2</span> su 678 recensioni.
+            </h2>
+          </div>
+          <BookingBadge label="Superbo" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map((r, i) => (
-            <RevealSection key={r.name} delay={i * 0.1} direction="right">
-              <GlassPanel className="p-6 h-full flex flex-col">
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: r.rating }).map((_, idx) => (
-                    <Star key={idx} weight="fill" size={14} className="text-accent" />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <p className="text-small text-neutral-dark/80 leading-relaxed flex-1 mb-6 italic">
-                  &ldquo;{r.quote}&rdquo;
-                </p>
-
-                {/* Attribution */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-small font-medium text-neutral-dark">{r.name}</p>
-                    <p className="text-small text-neutral-dark/50">{r.country}</p>
-                  </div>
-                  <p className="text-small text-neutral-dark/40">{r.date}</p>
-                </div>
-              </GlassPanel>
-            </RevealSection>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-10% 0px' }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+          className="mt-12 grid gap-5 md:grid-cols-3"
+        >
+          {reviews.map((r) => (
+            <motion.article
+              key={r.name}
+              variants={{
+                hidden: { opacity: 0, x: reduced ? 0 : 20 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 0.6, ease: EASE_SOFT_OUT }}
+              className="card-soft flex flex-col rounded-md p-7 transition-transform duration-[400ms] hover:-translate-y-1"
+            >
+              <Quotes size={24} weight="fill" className="text-accent" />
+              <div className="mt-4 flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={14} weight="fill" className="text-accent" />
+                ))}
+              </div>
+              <p className="mt-5 flex-1 text-body text-ink/85">"{r.quote}"</p>
+              <footer className="mt-7 border-t border-ink/10 pt-4 text-small text-ink/65">
+                <span className="font-medium text-ink">{r.name}</span>
+                <span className="mx-2 text-ink/30">·</span>
+                {r.country}
+                <span className="mx-2 text-ink/30">·</span>
+                {r.date}
+              </footer>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

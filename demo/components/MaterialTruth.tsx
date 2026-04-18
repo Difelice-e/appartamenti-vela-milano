@@ -1,69 +1,90 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import SectionLabel from "./ui/SectionLabel";
-import RevealSection from "./ui/RevealSection";
-import GlassPanel from "./ui/GlassPanel";
+import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { SectionLabel } from './ui/SectionLabel';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
-const materials = [
+const items = [
   {
-    src: "/photos/camere_3.jpg",
-    alt: "Parquet chiaro in rovere negli appartamenti",
-    label: "Parquet chiaro",
-    title: "Rovere chiaro, tre appartamenti",
-    body: "Il mattino entra attraverso il legno. Il parquet chiaro è il filo che lega ogni stanza — caldo sotto i piedi, luminoso agli occhi.",
+    photo: '/photos/camere_3.jpg',
+    alt: 'Parquet chiaro nella camera',
+    title: 'Parquet chiaro',
+    body: 'Rovere chiaro in tutti e tre gli appartamenti. La mattina entra dai vetri e scorre fino al balcone.',
   },
   {
-    src: "/photos/cucina_1.jpg",
-    alt: "Cucina completamente attrezzata con piano induzione",
-    label: "Cucina completa",
-    title: "Induzione, forno, Nespresso",
-    body: "Cucina come a casa, a Milano. Piano induzione, forno, macchina del caffè, tutto l'essenziale per cucinare senza rinunce.",
+    photo: '/photos/cucina_2.jpg',
+    alt: 'Cucina con piano a induzione',
+    title: 'Cucina completa',
+    body: 'Piano a induzione, forno, macchina del caffè. Cucina come a casa — anche a Milano, anche in trasferta.',
   },
   {
-    src: "/photos/bagni_1.jpg",
-    alt: "Bagno con prodotti bio certificati",
-    label: "100% Bio",
-    title: "Prodotti certificati, inclusi",
-    body: "Shampoo, balsamo, bagnoschiuma — tutti bio, inclusi nel soggiorno. Perché il rispetto per te e per l'ambiente non è un optional.",
+    photo: '/photos/colazione_1.jpg',
+    alt: 'Colazione servita su tavolo in vetro con cornetti e caffè',
+    title: 'Colazione pensata',
+    body: 'Cornetti, caffè, succo, biscotti e piccoli piaceri sul tavolo di vetro. Perché la prima cosa della giornata merita un gesto.',
   },
 ];
 
-export default function MaterialTruth() {
-  return (
-    <section id="material-truth" className="section-py bg-secondary">
-      <div className="container-brand">
-        <RevealSection className="text-center mb-14">
-          <SectionLabel>I dettagli fanno la differenza</SectionLabel>
-          <h2 className="heading-h2 text-neutral-dark text-balance">
-            Non claim. Materia vera.
-          </h2>
-        </RevealSection>
+export function MaterialTruth() {
+  const reduced = useReducedMotion();
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {materials.map((m, i) => (
-            <RevealSection key={m.label} delay={i * 0.12} className="flex flex-col">
-              <GlassPanel className="flex flex-col h-full overflow-hidden">
-                {/* Photo */}
-                <div className="relative h-52 flex-shrink-0 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={m.src}
-                    alt={m.alt}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                {/* Text */}
-                <div className="p-6 flex flex-col flex-1">
-                  <p className="label-micro text-primary mb-2">{m.label}</p>
-                  <h3 className="heading-h3 text-neutral-dark mb-3">{m.title}</h3>
-                  <p className="text-small text-neutral-dark/70 leading-relaxed flex-1">{m.body}</p>
-                </div>
-              </GlassPanel>
-            </RevealSection>
+  return (
+    <section className="section-py bg-secondary">
+      <div className="container-vela">
+        <motion.div
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.6, ease: EASE_SOFT_OUT }}
+          className="max-w-[720px]"
+        >
+          <SectionLabel>Materia e cura</SectionLabel>
+          <h2 className="mt-4 font-display text-h1 font-medium leading-[1.1] tracking-[-0.012em] text-ink">
+            I dettagli che <span className="italic text-primary">abitano</span> con te.
+          </h2>
+          <p className="mt-6 text-body-l text-ink/75">
+            Non "comfort generico". Materiali e scelte specifiche, pensate per chi resta
+            qualche notte o qualche settimana.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-10% 0px' }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12 } },
+          }}
+          className="mt-14 grid gap-6 md:grid-cols-3 md:gap-5"
+        >
+          {items.map((item) => (
+            <motion.article
+              key={item.title}
+              variants={{
+                hidden: { opacity: 0, y: reduced ? 0 : 24 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.6, ease: EASE_SOFT_OUT }}
+              className="card-soft group overflow-hidden rounded-md transition-shadow duration-[400ms] hover:shadow-card-hover"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={item.photo}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-[800ms] group-hover:scale-[1.05]"
+                />
+              </div>
+              <div className="p-7">
+                <h3 className="font-display text-h2 font-medium text-ink">{item.title}</h3>
+                <p className="mt-3 text-body text-ink/75">{item.body}</p>
+              </div>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

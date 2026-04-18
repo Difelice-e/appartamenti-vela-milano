@@ -1,23 +1,25 @@
-import { Star } from "@phosphor-icons/react/dist/ssr";
+import { Star } from '@phosphor-icons/react/dist/ssr';
 
-interface BookingBadgeProps {
+type Props = {
+  rating?: number;
+  count?: number;
+  label?: string;
   className?: string;
-  dark?: boolean;
-}
+};
 
-export default function BookingBadge({ className = "", dark = false }: BookingBadgeProps) {
+export function BookingBadge({ rating = 9.2, count = 678, label = 'Superbo', className = '' }: Props) {
   return (
     <div
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-pill text-small font-medium
-        ${dark
-          ? "bg-accent/20 text-accent border border-accent/30"
-          : "bg-primary/10 text-primary border border-primary/20"
-        } ${className}`}
+      className={`glass-pill inline-flex items-center gap-3 rounded-pill px-4 py-2 ${className}`}
     >
-      <Star weight="fill" size={14} className={dark ? "text-accent" : "text-primary"} />
-      <span>9.2 Superbo</span>
-      <span className="opacity-60">·</span>
-      <span>678 recensioni</span>
+      <div className="flex items-center gap-1.5">
+        <Star size={14} weight="fill" className="text-accent" />
+        <span className="font-semibold text-[14px] text-ink">{rating.toFixed(1)}</span>
+      </div>
+      <span className="h-3 w-px bg-ink/15" aria-hidden="true" />
+      <span className="text-[13px] text-ink/75">
+        {label} <span className="text-ink/55">· {count} recensioni</span>
+      </span>
     </div>
   );
 }

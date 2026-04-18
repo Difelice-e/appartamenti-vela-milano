@@ -1,102 +1,146 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { List, X } from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { List, X } from '@phosphor-icons/react/dist/ssr';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
-const navLinks = [
-  { label: "Appartamenti", href: "#gli-appartamenti" },
-  { label: "Garage", href: "#garage" },
-  { label: "Business", href: "#business" },
-  { label: "Prenota", href: "#prenota" },
+const links = [
+  { href: '#appartamenti', label: 'Appartamenti' },
+  { href: '#garage', label: 'Garage' },
+  { href: '#business', label: 'Business' },
+  { href: '#prenota', label: 'Prenota' },
 ];
 
-export default function Navigation() {
+const MENU_ID = 'primary-mobile-menu';
+
+export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!open) {
+      document.body.style.overflow = '';
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    firstLinkRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-[40] transition-all duration-300
-          ${scrolled ? "glass" : "bg-transparent"}
-        `}
-        style={{ height: "var(--nav-h-desktop)" }}
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: EASE_SOFT_OUT, delay: 0.1 }}
+        className="fixed inset-x-0 top-0 z-[40]"
       >
-        <div className="container-brand h-full flex items-center justify-between">
-          {/* Wordmark */}
-          <a
-            href="#"
-            className="font-display font-medium text-neutral-dark hover:text-primary transition-colors duration-200"
-            style={{ fontSize: "var(--fs-h3)", letterSpacing: "-0.01em" }}
-          >
-            Appartamenti Vela
-          </a>
-
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-small text-neutral-dark/75 hover:text-primary transition-colors duration-200"
-                style={{ letterSpacing: "var(--ls-nav-link)" }}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#prenota"
-              className="bg-primary hover:bg-primary-hover text-white text-small font-medium px-5 py-2.5 rounded-pill transition-colors duration-200 cursor-pointer"
-            >
-              Chiedi disponibilità
+        {/*
+          Transition only the visual surface, not the layout box.
+          The inner container keeps its size; the scrolled state changes
+          background/border/shadow via the .nav-shell-scrolled class.
+        */}
+        <div
+          className={`nav-shell transition-[background-color,backdrop-filter,box-shadow,border-color] duration-[300ms] ease-soft-out ${
+            scrolled ? 'nav-shell-scrolled' : ''
+          }`}
+        >
+          <div className="mx-auto flex h-[64px] max-w-[1280px] items-center justify-between px-5 lg:h-[72px] lg:px-8">
+            <a href="#top" className="group flex items-baseline gap-1">
+              <span className="font-display italic font-normal text-[22px] leading-none text-ink transition-colors group-hover:text-primary">
+                Appartamenti
+              </span>
+              <span className="font-display italic font-medium text-[22px] leading-none text-primary">
+                Vela
+              </span>
+              <span className="font-display italic font-normal text-[22px] leading-none text-ink hidden sm:inline">
+                Milano
+              </span>
             </a>
-          </nav>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden text-neutral-dark p-2 cursor-pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Chiudi menu" : "Apri menu"}
-          >
-            {menuOpen ? <X size={24} /> : <List size={24} />}
-          </button>
+            <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigazione principale">
+              {links.map((l) => (
+                <a key={l.href} href={l.href} className="nav-link">
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
+              <a href="#prenota" className="btn-primary hidden md:inline-flex">
+                Chiedi disponibilità
+              </a>
+              <button
+                type="button"
+                aria-label={open ? 'Chiudi menu' : 'Apri menu'}
+                aria-expanded={open}
+                aria-controls={MENU_ID}
+                onClick={() => setOpen(!open)}
+                className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-pill border border-ink/15 bg-white/60"
+              >
+                {open ? <X size={20} weight="regular" /> : <List size={20} weight="regular" />}
+              </button>
+            </div>
+          </div>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Mobile overlay */}
       <AnimatePresence>
-        {menuOpen && (
+        {open && (
           <motion.div
-            className="fixed inset-0 z-[39] glass flex flex-col items-center justify-center gap-8 md:hidden"
+            id={MENU_ID}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3, ease: EASE_SOFT_OUT }}
+            className="fixed inset-0 z-[45] lg:hidden"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="heading-h2 text-neutral-dark hover:text-primary transition-colors duration-200 cursor-pointer"
-                onClick={() => setMenuOpen(false)}
+            <div className="glass absolute inset-0" />
+            <div className="relative flex h-full flex-col items-start justify-center gap-6 px-8">
+              {links.map((l, i) => (
+                <motion.a
+                  key={l.href}
+                  ref={i === 0 ? firstLinkRef : undefined}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, ease: EASE_SOFT_OUT, delay: 0.08 * i + 0.1 }}
+                  className="font-display text-[40px] leading-[1.1] text-ink"
+                >
+                  {l.label}
+                </motion.a>
+              ))}
+              <motion.a
+                href="#prenota"
+                onClick={() => setOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE_SOFT_OUT, delay: 0.4 }}
+                className="btn-primary mt-6"
               >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#prenota"
-              className="bg-primary hover:bg-primary-hover text-white font-medium px-8 py-4 rounded-pill transition-colors duration-200 cursor-pointer mt-4"
-              onClick={() => setMenuOpen(false)}
-            >
-              Chiedi disponibilità
-            </a>
+                Chiedi disponibilità
+              </motion.a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

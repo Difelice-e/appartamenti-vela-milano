@@ -1,15 +1,23 @@
-interface SectionLabelProps {
-  children: string;
-  className?: string;
-  light?: boolean;
-}
+import type { ReactNode } from 'react';
 
-export default function SectionLabel({ children, className = "", light = false }: SectionLabelProps) {
+type Props = {
+  children: ReactNode;
+  tone?: 'primary' | 'accent' | 'light';
+  className?: string;
+};
+
+const toneClass = {
+  primary: 'text-primary',
+  accent: 'text-accent',
+  light: 'text-white/80',
+};
+
+export function SectionLabel({ children, tone = 'primary', className = '' }: Props) {
   return (
-    <p
-      className={`label-micro mb-4 ${light ? "text-accent" : "text-primary"} ${className}`}
+    <span
+      className={`inline-block text-micro font-semibold uppercase tracking-[0.08em] ${toneClass[tone]} ${className}`}
     >
       {children}
-    </p>
+    </span>
   );
 }

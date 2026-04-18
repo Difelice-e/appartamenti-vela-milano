@@ -1,70 +1,67 @@
-import { InstagramLogo, FacebookLogo, MapPin, EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr";
+import { InstagramLogo, FacebookLogo, EnvelopeSimple, Phone, MapPin, Clock } from '@phosphor-icons/react/dist/ssr';
 
-const footerLinks = [
-  { label: "Appartamenti", href: "#gli-appartamenti" },
-  { label: "Garage", href: "#garage" },
-  { label: "Business", href: "#business" },
-  { label: "Recensioni", href: "#recensioni" },
-  { label: "Prenota", href: "#prenota" },
+const navLinks = [
+  { href: '#appartamenti', label: 'Appartamenti' },
+  { href: '#garage', label: 'Garage' },
+  { href: '#business', label: 'Business & Fiere' },
+  { href: '#prenota', label: 'Prenota' },
 ];
 
 const legalLinks = [
-  { label: "Privacy Policy", page: "privacy" },
-  { label: "Cookie Policy", page: "cookie" },
-  { label: "Termini e Condizioni", page: "terms" },
+  { href: '#', label: 'Privacy Policy', dataPage: 'privacy' },
+  { href: '#', label: 'Cookie Policy', dataPage: 'cookie' },
+  { href: '#', label: 'Termini e Condizioni', dataPage: 'terms' },
 ];
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer
-      className="border-t"
-      style={{ borderColor: "var(--color-divider-soft)" }}
-    >
-      <div className="container-brand py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <footer className="bg-ink text-white/80">
+      <div className="container-vela py-16 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Brand */}
-          <div>
-            <p
-              className="font-display font-medium text-neutral-dark mb-3"
-              style={{ fontSize: "var(--fs-h3)" }}
-            >
-              Appartamenti Vela Milano
+          <div className="lg:col-span-5">
+            <div className="flex items-baseline gap-1">
+              <span className="font-display italic font-normal text-[26px] leading-none text-white">
+                Appartamenti
+              </span>
+              <span className="font-display italic font-medium text-[26px] leading-none text-primary">
+                Vela
+              </span>
+              <span className="font-display italic font-normal text-[26px] leading-none text-white">
+                Milano
+              </span>
+            </div>
+            <p className="mt-5 max-w-[420px] text-body text-white/70">
+              Un'oasi verde nel cuore di Milano. Tre appartamenti luminosi a 400 m
+              dalla metro Piola.
             </p>
-            <p className="text-small text-neutral-dark/60 mb-6">
-              Un&apos;oasi verde nel cuore di Milano
-            </p>
-            <div className="flex gap-4">
+            <div className="mt-6 flex items-center gap-3">
               <a
                 href="https://instagram.com/appartamentivelamilano"
-                target="_blank"
-                rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="text-neutral-dark/40 hover:text-primary transition-colors duration-200 cursor-pointer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-accent hover:text-accent"
               >
-                <InstagramLogo size={20} weight="regular" />
+                <InstagramLogo size={18} weight="regular" />
               </a>
               <a
                 href="https://facebook.com/appartamentivelamilano"
-                target="_blank"
-                rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="text-neutral-dark/40 hover:text-primary transition-colors duration-200 cursor-pointer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-accent hover:text-accent"
               >
-                <FacebookLogo size={20} weight="regular" />
+                <FacebookLogo size={18} weight="regular" />
               </a>
             </div>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <p className="label-micro text-neutral-dark mb-4">Esplora</p>
-            <ul className="space-y-3">
-              {footerLinks.map((l) => (
+          {/* Links */}
+          <div className="lg:col-span-3">
+            <h4 className="text-micro font-semibold uppercase tracking-[0.08em] text-accent">
+              Esplora
+            </h4>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((l) => (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="text-small text-neutral-dark/60 hover:text-primary transition-colors duration-200 cursor-pointer"
-                  >
+                  <a href={l.href} className="text-body text-white/75 transition-colors hover:text-white">
                     {l.label}
                   </a>
                 </li>
@@ -73,58 +70,52 @@ export default function Footer() {
           </div>
 
           {/* Contacts */}
-          <div>
-            <p className="label-micro text-neutral-dark mb-4">Contatti</p>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-small text-neutral-dark/60">
-                <MapPin size={14} weight="regular" className="text-primary flex-shrink-0" />
-                Via Vincenzo Vela, 17 · 20133 Milano
+          <div className="lg:col-span-4">
+            <h4 className="text-micro font-semibold uppercase tracking-[0.08em] text-accent">
+              Contatti
+            </h4>
+            <ul className="mt-5 space-y-3 text-body text-white/75">
+              <li className="flex items-start gap-3">
+                <MapPin size={16} weight="regular" className="mt-1 flex-shrink-0" />
+                Via Vincenzo Vela 17
+                <br />
+                20133 Milano (MI)
               </li>
-              <li>
-                <a
-                  href="mailto:info@appartamentivelamilano.it"
-                  className="flex items-center gap-2 text-small text-neutral-dark/60 hover:text-primary transition-colors cursor-pointer"
-                >
-                  <EnvelopeSimple size={14} weight="regular" className="text-primary" />
-                  info@appartamentivelamilano.it
-                </a>
+              <li className="flex items-center gap-3">
+                <EnvelopeSimple size={16} weight="regular" />
+                info@appartamentivelamilano.it
               </li>
-              <li>
-                <a
-                  href="tel:+390000000000"
-                  className="flex items-center gap-2 text-small text-neutral-dark/60 hover:text-primary transition-colors cursor-pointer"
-                >
-                  <Phone size={14} weight="regular" className="text-primary" />
-                  +39 000 000 0000
-                </a>
+              <li className="flex items-center gap-3">
+                <Phone size={16} weight="regular" />
+                +39 000 000 0000
               </li>
-              <li className="text-small text-neutral-dark/60">
-                Check-in: 12:00 – 23:59
+              <li className="flex items-start gap-3">
+                <Clock size={16} weight="regular" className="mt-1 flex-shrink-0" />
+                Check-in 12:00–23:59
+                <br />
+                Check-out 01:00–10:00
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div
-          className="pt-6 border-t flex flex-col sm:flex-row justify-between items-center gap-4"
-          style={{ borderColor: "var(--color-divider-soft)" }}
-        >
-          <p className="text-small text-neutral-dark/40">
-            © 2026 Appartamenti Vela Milano
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 md:flex-row md:items-center">
+          <p className="text-small text-white/50">
+            © {new Date().getFullYear()} Appartamenti Vela Milano. Tutti i diritti riservati.
           </p>
-          <div className="flex gap-6">
+          <ul className="flex flex-wrap gap-5 text-small text-white/60">
             {legalLinks.map((l) => (
-              <a
-                key={l.page}
-                href="#"
-                data-page={l.page}
-                className="text-small text-neutral-dark/40 hover:text-neutral-dark/70 transition-colors cursor-pointer"
-              >
-                {l.label}
-              </a>
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  data-page={l.dataPage}
+                  className="transition-colors hover:text-white"
+                >
+                  {l.label}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </footer>

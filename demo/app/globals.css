@@ -2,291 +2,336 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================================================================
-   Appartamenti Vela Milano — Design Tokens (CSS custom properties)
-   Source: brand/tokens.css v1.0 — Phase 1
-   ========================================================================= */
+@import '../../brand/tokens.css';
 
-:root {
-  /* Core palette */
-  --color-primary: #3A7D44;
-  --color-primary-hover: #2F6939;
-  --color-primary-pressed: #285B31;
-  --color-secondary: #F6F4EC;
-  --color-white: #FFFFFF;
-  --color-accent: #D9B382;
-  --color-accent-hover: #CEA373;
-  --color-neutral-dark: #1F2A24;
-
-  /* State */
-  --color-success: #3A7D44;
-  --color-warning: #C68B4A;
-  --color-error: #B2453A;
-
-  /* Dividers */
-  --color-divider-soft: rgba(31, 42, 36, 0.08);
-  --color-divider-strong: rgba(31, 42, 36, 0.18);
-
-  /* Text opacity tiers */
-  --text-opacity-primary: 1;
-  --text-opacity-secondary: 0.75;
-  --text-opacity-min: 0.55;
-
-  /* Liquid Glass */
-  --glass-bg-light: rgba(255, 255, 255, 0.55);
-  --glass-bg-on-photo: rgba(246, 244, 236, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.35);
-  --glass-blur: 40px;
-  --glass-blur-photo: 48px;
-  --glass-saturate: 180%;
-  --glass-saturate-photo: 200%;
-  --glass-highlight-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 12px 48px rgba(31, 42, 36, 0.12);
-  --glass-fallback-bg: #F6F4EC;
-  --glass-fallback-shadow: 0 8px 32px rgba(31, 42, 36, 0.10);
-
-  /* Typography */
-  --font-display: var(--font-fraunces), 'Newsreader', Georgia, serif;
-  --font-body: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;
-
-  --fs-display-xl: clamp(44px, 7vw, 72px);
-  --fs-display-l: clamp(36px, 5.5vw, 56px);
-  --fs-h1: clamp(30px, 4.5vw, 44px);
-  --fs-h2: clamp(24px, 3.5vw, 32px);
-  --fs-h3: 20px;
-  --fs-body-l: clamp(16px, 1.6vw, 18px);
-  --fs-body: 16px;
-  --fs-small: 14px;
-  --fs-micro: 12px;
-
-  --lh-display-xl: 1.05;
-  --lh-display-l: 1.08;
-  --lh-h1: 1.1;
-  --lh-h2: 1.15;
-  --lh-h3: 1.3;
-  --lh-body: 1.55;
-  --lh-small: 1.5;
-  --lh-micro: 1.4;
-
-  --ls-display-xl: -0.02em;
-  --ls-display-l: -0.015em;
-  --ls-h1: -0.012em;
-  --ls-h2: -0.01em;
-  --ls-tight: 0;
-  --ls-micro-upper: 0.08em;
-  --ls-nav-link: 0.04em;
-
-  /* Spacing */
-  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
-  --space-5: 24px;  --space-6: 32px;  --space-8: 48px;  --space-10: 64px;
-  --space-12: 96px; --space-16: 128px; --space-20: 160px;
-  --section-py-desktop: 140px;
-  --section-py-mobile: 90px;
-
-  /* Layout */
-  --container-max: 1200px;
-  --container-hero-max: 1280px;
-  --nav-h-desktop: 72px;
-  --nav-h-mobile: 64px;
-
-  /* Border radius */
-  --radius-xs: 14px;
-  --radius-sm: 18px;
-  --radius-md: 20px;
-  --radius-lg: 24px;
-  --radius-xl: 28px;
-  --radius-pill: 999px;
-
-  /* Shadows */
-  --shadow-card-soft: 0 8px 32px rgba(31, 42, 36, 0.08);
-  --shadow-card-hover: 0 14px 48px rgba(31, 42, 36, 0.14);
-  --shadow-glass: 0 12px 48px rgba(31, 42, 36, 0.12);
-  --shadow-focus-ring: 0 0 0 3px rgba(58, 125, 68, 0.15);
-
-  /* Motion */
-  --ease-soft-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 200ms;
-  --dur-card: 400ms;
-  --dur-reveal: 600ms;
-  --dur-hero: 1200ms;
-  --stagger-delay: 80ms;
-
-  /* Z-index */
-  --z-base: 0;
-  --z-sticky-nav: 40;
-  --z-glass-overlay: 50;
-  --z-modal: 90;
-  --z-toast: 100;
-}
-
-/* Accessibility fallbacks */
-@media (prefers-reduced-transparency: reduce) {
-  :root {
-    --glass-bg-light: #F6F4EC;
-    --glass-bg-on-photo: #F6F4EC;
-    --glass-border: rgba(31, 42, 36, 0.08);
-    --glass-blur: 0px;
-    --glass-blur-photo: 0px;
-    --glass-saturate: 100%;
-    --glass-saturate-photo: 100%;
-    --glass-shadow: 0 8px 32px rgba(31, 42, 36, 0.10);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-micro: 0ms;
-    --dur-card: 0ms;
-    --dur-reveal: 0ms;
-    --dur-hero: 0ms;
-    --stagger-delay: 0ms;
-  }
-}
-
-/* =========================================================================
+/* ==========================================================================
    Base resets
-   ========================================================================= */
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+   ========================================================================== */
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h-mobile) + 12px);
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: calc(var(--nav-h-desktop) + 16px);
+  }
 }
 
 body {
+  background-color: var(--color-secondary);
   color: var(--color-neutral-dark);
-  background: var(--color-white);
-  font-family: var(--font-body);
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
-/* =========================================================================
-   Glass utilities
-   ========================================================================= */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
 
-@layer utilities {
-  .glass {
-    background: var(--glass-bg-light);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow: var(--glass-highlight-inset), var(--glass-shadow);
-  }
+/* ==========================================================================
+   Liquid glass utilities
+   ========================================================================== */
 
-  .glass-on-photo {
-    background: var(--glass-bg-on-photo);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--glass-blur-photo)) saturate(var(--glass-saturate-photo));
-    -webkit-backdrop-filter: blur(var(--glass-blur-photo)) saturate(var(--glass-saturate-photo));
-    box-shadow: var(--glass-highlight-inset), var(--glass-shadow);
-  }
+.glass {
+  background-color: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight-inset), var(--glass-shadow);
+}
 
-  .section-py {
-    padding-top: var(--section-py-mobile);
-    padding-bottom: var(--section-py-mobile);
-  }
+.glass-on-photo {
+  background-color: var(--glass-bg-on-photo);
+  backdrop-filter: blur(var(--glass-blur-photo)) saturate(var(--glass-saturate-photo));
+  -webkit-backdrop-filter: blur(var(--glass-blur-photo)) saturate(var(--glass-saturate-photo));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight-inset), var(--glass-shadow);
+}
 
-  @media (min-width: 1024px) {
-    .section-py {
-      padding-top: var(--section-py-desktop);
-      padding-bottom: var(--section-py-desktop);
-    }
-  }
+/* Glass pill micro — used on chips/badges */
+.glass-pill {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 14px rgba(31, 42, 36, 0.06);
+}
 
-  .container-brand {
-    width: 100%;
-    max-width: var(--container-max);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  @media (min-width: 768px) {
-    .container-brand {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-  }
-
-  .text-balance {
-    text-wrap: balance;
+/* Mobile glass strip-down per §6.6 budget */
+@media (max-width: 767px) {
+  .glass-desktop-only {
+    background-color: var(--color-secondary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--color-divider-soft);
   }
 }
 
-/* =========================================================================
+/* Solid card — use on opaque sections where glass blur has nothing to read */
+.card-soft {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-divider-soft);
+  box-shadow: var(--shadow-card-soft);
+}
+
+.card-pill {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-divider-soft);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 4px 14px rgba(31, 42, 36, 0.05);
+}
+
+/* ==========================================================================
    Typography helpers
-   ========================================================================= */
+   ========================================================================== */
 
-.font-display {
-  font-family: var(--font-display);
-}
-
-.display-xl {
-  font-family: var(--font-display);
-  font-size: var(--fs-display-xl);
-  line-height: var(--lh-display-xl);
-  letter-spacing: var(--ls-display-xl);
-  font-weight: 400;
+.font-display-italic {
+  font-family: var(--font-fraunces), Georgia, serif;
   font-style: italic;
-}
-
-.display-l {
-  font-family: var(--font-display);
-  font-size: var(--fs-display-l);
-  line-height: var(--lh-display-l);
-  letter-spacing: var(--ls-display-l);
   font-weight: 400;
-  font-style: italic;
 }
 
-.heading-h1 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h1);
-  line-height: var(--lh-h1);
-  letter-spacing: var(--ls-h1);
-  font-weight: 500;
-}
-
-.heading-h2 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
-  letter-spacing: var(--ls-h2);
-  font-weight: 500;
-}
-
-.heading-h3 {
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
-  font-weight: 600;
-}
-
-.label-micro {
+.eyebrow {
   font-size: var(--fs-micro);
-  line-height: var(--lh-micro);
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-micro-upper);
-  font-weight: 600;
   text-transform: uppercase;
+  color: var(--color-primary);
 }
 
-.body-l {
-  font-size: var(--fs-body-l);
-  line-height: var(--lh-body);
+.nav-link {
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-nav-link);
+  color: var(--color-neutral-dark);
+  transition: color var(--dur-micro) var(--ease-soft-out);
 }
 
-/* Focus ring */
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+/* Navigation shell — animates surface only, never layout */
+.nav-shell {
+  /* Top-of-page state: cream-tinted glass strong enough for AA contrast of dark ink
+     over bright hero photos, yet soft enough to still feel like a surface, not a bar. */
+  background-color: rgba(246, 244, 236, 0.58);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.nav-shell-scrolled {
+  /* Scrolled state: warm cream-tinted glass → keeps the liquid feel visible
+     even when sitting over white/cream sections. */
+  background-color: rgba(246, 244, 236, 0.78);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--color-divider-soft);
+  box-shadow: 0 4px 24px rgba(31, 42, 36, 0.08);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav-shell {
+    background-color: var(--color-secondary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .nav-shell-scrolled {
+    background-color: var(--color-secondary);
+  }
+}
+
+/* ==========================================================================
+   Glass variants — only use over photo or saturated-green backgrounds
+   ========================================================================== */
+
+/* Glass tuned for dark green backgrounds (Ospitalita, Garage) */
+.glass-on-dark {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-on-dark {
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Accent rule — used sparingly as wayfinding marks */
+.accent-rule {
+  display: inline-block;
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Button primitives (used inline with Tailwind classes)
+   ========================================================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 22px;
+  border-radius: var(--radius-xs);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0;
+  border: 1px solid transparent;
+  box-shadow: 0 6px 20px rgba(58, 125, 68, 0.22);
+  transition:
+    background var(--dur-micro) var(--ease-soft-out),
+    transform var(--dur-micro) var(--ease-soft-out),
+    box-shadow var(--dur-micro) var(--ease-soft-out);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(58, 125, 68, 0.28);
+}
+
+.btn-primary:active {
+  background: var(--color-primary-pressed);
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 22px;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--color-neutral-dark);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  border: 1px solid rgba(31, 42, 36, 0.22);
+  transition: all var(--dur-micro) var(--ease-soft-out);
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  background: rgba(31, 42, 36, 0.04);
+  border-color: var(--color-neutral-dark);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 22px;
+  border-radius: var(--radius-xs);
+  background: var(--color-accent);
+  color: var(--color-neutral-dark);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  border: 1px solid transparent;
+  transition: all var(--dur-micro) var(--ease-soft-out);
+  cursor: pointer;
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Focus states (accessibility)
+   ========================================================================== */
+
 :focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus-ring);
+  border-radius: var(--radius-xs);
+}
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container-vela {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .container-vela {
+    padding: 0 var(--space-6);
+  }
+}
+
+.container-hero {
+  width: 100%;
+  max-width: var(--container-hero-max);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .container-hero {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* ==========================================================================
+   Section rhythm
+   ========================================================================== */
+
+.section-py {
+  padding-top: var(--section-py-mobile);
+  padding-bottom: var(--section-py-mobile);
+}
+
+@media (min-width: 1024px) {
+  .section-py {
+    padding-top: var(--section-py-desktop);
+    padding-bottom: var(--section-py-desktop);
+  }
+}
+
+/* ==========================================================================
+   Divider
+   ========================================================================== */
+
+.divider-soft {
+  height: 1px;
+  background: var(--color-divider-soft);
+}
+
+/* ==========================================================================
+   Reduced motion (Framer Motion respects, but also CSS transitions)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

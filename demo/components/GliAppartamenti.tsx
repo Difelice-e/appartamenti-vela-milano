@@ -1,106 +1,167 @@
-"use client";
+'use client';
 
-import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import SectionLabel from "./ui/SectionLabel";
-import RevealSection from "./ui/RevealSection";
-import { Bathtub, WifiHigh, ChefHat, Door, Baby, Car } from "@phosphor-icons/react";
+import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Bed, Users, WifiHigh, Tree, CookingPot, Drop } from '@phosphor-icons/react/dist/ssr';
+import { SectionLabel } from './ui/SectionLabel';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
-const mosaicPhotos = [
-  { src: "/photos/balcone_1.jpg", alt: "Balcone spaziosa con vista verde", className: "col-span-2 row-span-2" },
-  { src: "/photos/camere_1.jpg", alt: "Camera matrimoniale con parquet chiaro" },
-  { src: "/photos/camere_2.jpg", alt: "Camera con finestre grandi e luce naturale" },
-  { src: "/photos/soggiorno_1.jpg", alt: "Salone luminoso" },
-  { src: "/photos/cucina_1.jpg", alt: "Cucina attrezzata con piano induzione" },
-  { src: "/photos/bagni_1.jpg", alt: "Bagno privato con prodotti bio" },
+const heroPhoto = {
+  src: '/photos/balcone_1.jpg',
+  alt: 'Balcone privato con piante — il cuore verde dell\'appartamento',
+};
+
+const gallery: { src: string; alt: string }[] = [
+  { src: '/photos/soggiorno_1.jpg', alt: 'Soggiorno luminoso con parquet chiaro' },
+  { src: '/photos/camere_1.jpg', alt: 'Camera matrimoniale con luce naturale' },
+  { src: '/photos/cucina_1.jpg', alt: 'Cucina attrezzata a induzione' },
 ];
 
 const features = [
-  { icon: Door, label: "3 bilocali" },
-  { icon: Baby, label: "Fino a 4 ospiti" },
-  { icon: Bathtub, label: "Bagno privato" },
-  { icon: ChefHat, label: "Cucina completa" },
-  { icon: WifiHigh, label: "WiFi gratuito" },
-  { icon: Car, label: "Garage disponibile" },
+  { icon: Bed, label: '3 bilocali matrimoniali' },
+  { icon: Users, label: 'Fino a 4 persone' },
+  { icon: Tree, label: 'Balcone privato' },
+  { icon: CookingPot, label: 'Cucina completa' },
+  { icon: Drop, label: 'Bagno privato' },
+  { icon: WifiHigh, label: 'WiFi gratuito' },
 ];
 
-export default function GliAppartamenti() {
-  const prefersReducedMotion = useReducedMotion();
+export function GliAppartamenti() {
+  const reduced = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ['-4%', reduced ? '-4%' : '8%']);
 
   return (
-    <section id="gli-appartamenti" className="section-py bg-white">
-      <div className="container-brand">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Photo mosaic */}
-          <motion.div
-            className="grid grid-cols-3 grid-rows-3 gap-2 h-[480px] lg:h-[560px]"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
-          >
-            {mosaicPhotos.map((photo, i) => (
-              <motion.div
-                key={photo.src}
-                className={`relative overflow-hidden rounded-md ${i === 0 ? "col-span-2 row-span-2" : ""}`}
-                initial={{ opacity: 0, scale: 0.96 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: prefersReducedMotion ? 0.2 : 0.5,
-                  delay: prefersReducedMotion ? 0 : i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 50vw, 30vw"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Text content */}
-          <RevealSection direction="right">
+    <section ref={ref} id="appartamenti" className="section-py bg-white">
+      <div className="container-vela">
+        {/* Header row — title left, deck right */}
+        <motion.div
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.6, ease: EASE_SOFT_OUT }}
+          className="grid gap-8 lg:grid-cols-12 lg:gap-16 lg:items-end"
+        >
+          <div className="lg:col-span-7">
             <SectionLabel>Gli appartamenti</SectionLabel>
-            <h2 className="heading-h2 text-neutral-dark mb-5 text-balance">
-              Tre appartamenti,<br />un respiro solo
+            <h2 className="mt-4 font-display text-[clamp(36px,5vw,64px)] font-medium leading-[1.04] tracking-[-0.015em] text-ink">
+              Tre appartamenti,
+              <br />
+              un <span className="italic text-primary">respiro</span> solo.
             </h2>
-            <p className="body-l text-neutral-dark/75 mb-8">
-              Non tre stanze d&apos;albergo, ma tre appartamenti veri — con parquet chiaro,
-              balconi che si aprono sul verde, cucine per sentirsi a casa e luce che entra
-              larga la mattina. Simili nell&apos;anima, ciascuno con la sua personalità.
+          </div>
+          <div className="lg:col-span-5">
+            <p className="text-body-l text-ink/75">
+              Tre bilocali simili e accoglienti. La mattina entra bassa dai vetri grandi,
+              il parquet chiaro la rimanda fino al balcone, dove le piante aprono gli occhi
+              con te.
             </p>
-
-            {/* Feature grid */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {features.map((f) => (
-                <div key={f.label} className="flex items-center gap-3 text-small text-neutral-dark/80">
-                  <f.icon size={18} weight="regular" className="text-primary flex-shrink-0" />
-                  <span>{f.label}</span>
-                </div>
-              ))}
+            <div className="mt-5 flex items-center gap-3">
+              <span className="accent-rule" aria-hidden="true" />
+              <span className="text-small uppercase tracking-[0.12em] text-accent font-semibold">
+                Bilocali · 2–4 ospiti
+              </span>
             </div>
+          </div>
+        </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href="#prenota"
-                className="inline-flex items-center justify-center bg-primary hover:bg-primary-hover text-white font-medium px-6 py-3.5 rounded-pill transition-colors duration-200 cursor-pointer text-small"
-              >
-                Prenota il tuo soggiorno
-              </a>
-              <a
-                href="#prenota"
-                className="inline-flex items-center justify-center border border-primary/30 hover:border-primary text-primary font-medium px-6 py-3.5 rounded-pill transition-colors duration-200 cursor-pointer text-small"
-              >
-                Chiedi disponibilità
-              </a>
-            </div>
-          </RevealSection>
-        </div>
+        {/* Hero photo — full width, large, with parallax */}
+        <motion.div
+          initial={{ opacity: 0, scale: reduced ? 1 : 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.9, ease: EASE_SOFT_OUT }}
+          className="relative mt-12 overflow-hidden rounded-lg aspect-[16/10] md:aspect-[21/9]"
+        >
+          <motion.div style={{ y: heroY }} className="absolute inset-0">
+            <Image
+              src={heroPhoto.src}
+              alt={heroPhoto.alt}
+              fill
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              className="object-cover scale-[1.08]"
+            />
+          </motion.div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, transparent 55%, rgba(31,42,36,0.35) 100%)',
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+            <p className="font-display italic text-white text-h3 md:text-[clamp(22px,2.2vw,28px)] max-w-[520px]">
+              Il balcone è il primo, vero ingresso di casa.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Gallery — 3 large landscape photos */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-10% 0px' }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+          className="mt-5 grid gap-5 md:grid-cols-3"
+        >
+          {gallery.map((p) => (
+            <motion.div
+              key={p.src}
+              variants={{
+                hidden: { opacity: 0, y: reduced ? 0 : 24 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+              className="group relative aspect-[4/3] overflow-hidden rounded-md"
+            >
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-[800ms] group-hover:scale-[1.05]"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Features + CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+          className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-16 lg:items-center"
+        >
+          <ul className="lg:col-span-8 grid grid-cols-2 gap-5 md:grid-cols-3">
+            {features.map((f) => (
+              <li key={f.label} className="flex items-start gap-3">
+                <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/8">
+                  <f.icon size={18} weight="regular" className="text-primary" />
+                </span>
+                <span className="text-body text-ink/85 pt-2">{f.label}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="lg:col-span-4 lg:text-right">
+            <a href="#prenota" className="btn-primary">
+              Prenota il tuo soggiorno
+              <ArrowRight size={18} weight="regular" />
+            </a>
+            <p className="mt-4 text-small text-ink/60">
+              Letti aggiuntivi e culle per bambini su richiesta.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

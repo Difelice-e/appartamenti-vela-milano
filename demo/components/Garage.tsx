@@ -1,76 +1,120 @@
-"use client";
+'use client';
 
-import { motion, useReducedMotion } from "framer-motion";
-import SectionLabel from "./ui/SectionLabel";
-import RevealSection from "./ui/RevealSection";
-import { Car, ArrowRight } from "@phosphor-icons/react";
+import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Car, ArrowRight, Shield, Garage as GarageIcon, Key } from '@phosphor-icons/react/dist/ssr';
+import { SectionLabel } from './ui/SectionLabel';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
-const features = ["Sicurezza", "Ground-level", "Coperto", "Prenotabile a parte"];
+const pills = [
+  { icon: Shield, label: 'Sicurezza' },
+  { icon: GarageIcon, label: 'Ground-level' },
+  { icon: Key, label: 'Prenotabile a parte' },
+  { icon: Car, label: 'Coperto' },
+];
 
-export default function Garage() {
-  const prefersReducedMotion = useReducedMotion();
+export function Garage() {
+  const reduced = useReducedMotion();
 
   return (
-    <section
-      id="garage"
-      className="section-py"
-      style={{ backgroundColor: "var(--color-neutral-dark)" }}
-    >
-      <div className="container-brand">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Icon / visual */}
-          <RevealSection direction="left">
-            <motion.div
-              className="flex justify-center lg:justify-end"
-              initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.85 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="w-40 h-40 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <Car size={64} weight="thin" className="text-accent" />
-              </div>
-            </motion.div>
-          </RevealSection>
+    <section id="garage" className="relative section-py overflow-hidden bg-[#1F2A24]">
+      {/* Background photo */}
+      <div className="absolute inset-0 opacity-30">
+        <Image
+          src="/photos/parcheggio_1.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(31,42,36,0.92) 0%, rgba(31,42,36,0.82) 60%, rgba(31,42,36,0.6) 100%)',
+          }}
+        />
+      </div>
 
-          {/* Text */}
-          <RevealSection direction="right">
-            <SectionLabel light>Garage privato</SectionLabel>
-            <h2 className="heading-h2 text-white mb-5 text-balance">
-              Lascia l&apos;auto.<br />Esplora a piedi.
+      <div className="container-vela relative z-10">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <motion.div
+            initial={{ opacity: 0, x: reduced ? 0 : -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+            className="lg:col-span-7"
+          >
+            <SectionLabel tone="accent">Garage privato</SectionLabel>
+            <h2 className="mt-4 font-display text-[clamp(36px,5vw,56px)] font-medium leading-[1.08] tracking-[-0.015em] text-white">
+              Lascia l'auto.
+              <br />
+              Esplora a <span className="italic text-accent">piedi</span>.
             </h2>
-            <p className="body-l mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
+            <p className="mt-6 max-w-[560px] text-body-l text-white/75">
               Garage ground-level prenotabile a parte. Arriva in auto, parcheggia sicuro,
               poi muoviti in metro, in bici, a piedi — Milano è a due passi.
             </p>
 
-            {/* Feature pills */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {features.map((f, i) => (
-                <motion.span
-                  key={f}
-                  className="text-small px-4 py-1.5 rounded-pill border border-white/20 text-white/70"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: prefersReducedMotion ? 0 : 0.3 + i * 0.08,
-                    duration: 0.4,
-                  }}
-                >
-                  {f}
-                </motion.span>
-              ))}
-            </div>
-
-            <a
-              href="#prenota"
-              className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-neutral-dark font-medium px-6 py-3.5 rounded-pill transition-colors duration-200 cursor-pointer text-small"
+            <motion.ul
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-10% 0px' }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+              }}
+              className="mt-8 flex flex-wrap gap-2"
             >
-              Aggiungi il garage alla prenotazione
-              <ArrowRight size={16} weight="regular" />
-            </a>
-          </RevealSection>
+              {pills.map((p) => (
+                <motion.li
+                  key={p.label}
+                  variants={{
+                    hidden: { opacity: 0, y: reduced ? 0 : 10 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.5, ease: EASE_SOFT_OUT }}
+                  className="glass-on-dark inline-flex items-center gap-2 rounded-pill px-4 py-2"
+                >
+                  <p.icon size={14} weight="regular" className="text-accent" />
+                  <span className="text-small text-white/90">{p.label}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+
+            <div className="mt-10">
+              <a href="#prenota" className="btn-accent">
+                Aggiungi il garage alla prenotazione
+                <ArrowRight size={18} weight="regular" />
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: reduced ? 1 : 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.8, ease: EASE_SOFT_OUT }}
+            className="lg:col-span-5"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg md:aspect-[5/4] lg:aspect-[4/5]">
+              <Image
+                src="/photos/parcheggio_1.jpg"
+                alt="Garage privato degli appartamenti Vela, ingresso con auto parcheggiata"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
+              {/* Accent corner marker */}
+              <div
+                aria-hidden="true"
+                className="absolute bottom-6 right-6 inline-flex items-center gap-2 rounded-pill bg-ink/70 px-3 py-1.5 text-micro font-semibold uppercase tracking-[0.1em] text-accent backdrop-blur-md"
+              >
+                Via Vela 17
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

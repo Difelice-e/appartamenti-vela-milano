@@ -56,8 +56,9 @@
      3. TYPOGRAPHY
      ----------------------------------------------------------------------- */
 
-  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Font-family stacks — consume next/font CSS variables when available */
+  --font-display: var(--font-fraunces, 'Fraunces'), 'Newsreader', Georgia, serif;
+  --font-body: var(--font-inter, 'Inter'), system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Weights */
   --fw-regular: 400;

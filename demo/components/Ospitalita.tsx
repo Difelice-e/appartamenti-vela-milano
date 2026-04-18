@@ -1,61 +1,122 @@
-"use client";
+'use client';
 
-import { motion, useReducedMotion } from "framer-motion";
-import SectionLabel from "./ui/SectionLabel";
-import RevealSection from "./ui/RevealSection";
-import { HandHeart, Clock, Translate, CheckCircle } from "@phosphor-icons/react";
+import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { HandHeart, Translate, ChatCircleDots, Clock } from '@phosphor-icons/react/dist/ssr';
+import { SectionLabel } from './ui/SectionLabel';
+import { EASE_SOFT_OUT } from '@/lib/motion';
 
-const details = [
-  { icon: Clock, text: "Check-in 12:00 – 23:59, anche oltre su richiesta" },
-  { icon: CheckCircle, text: "Check-out entro le 10:00" },
-  { icon: Translate, text: "Host multilingue — italiano, inglese e altre lingue" },
-  { icon: HandHeart, text: "Presenza autentica, non servizio anonimo" },
+const cards = [
+  {
+    icon: Translate,
+    title: 'Italiano, English, Français',
+    body: 'Parlo più lingue — quando sei in viaggio, l\'ospitalità deve capire e farsi capire.',
+  },
+  {
+    icon: ChatCircleDots,
+    title: 'Rispondo in giornata',
+    body: 'WhatsApp, email, telefono. Prima, durante e dopo il soggiorno — una risposta vera, non un form.',
+  },
+  {
+    icon: Clock,
+    title: 'Check-in fino a mezzanotte',
+    body: 'Voli in ritardo, arrivi tardi, treni saltati: ti aspetto. Senza formule, senza chiavi cieche.',
+  },
 ];
 
-export default function Ospitalita() {
-  const prefersReducedMotion = useReducedMotion();
+export function Ospitalita() {
+  const reduced = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-8%', reduced ? '-8%' : '8%']);
 
   return (
-    <section id="ospitalita" className="section-py bg-white">
-      <div className="container-brand">
-        <div className="max-w-2xl mx-auto text-center">
-          <RevealSection>
-            <SectionLabel>La tua host</SectionLabel>
+    <section ref={ref} className="relative section-py overflow-hidden bg-[#1F2A24]">
+      {/* Atmospheric dark-green background with subtle plant photo + parallax */}
+      <motion.div style={{ y: bgY }} className="absolute inset-x-0 -top-[8%] h-[116%] opacity-25">
+        <Image
+          src="/photos/balcone_1.jpg"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </motion.div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(31,42,36,0.92) 0%, rgba(31,42,36,0.78) 50%, rgba(31,42,36,0.92) 100%)',
+        }}
+      />
 
-            {/* Large icon */}
-            <motion.div
-              className="flex justify-center mb-8"
-              initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      <div className="container-vela relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10% 0px' }}
+          transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+          className="mx-auto max-w-[860px] text-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: reduced ? 1 : 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+            className="mx-auto mb-8 inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 ring-1 ring-accent/30"
+          >
+            <HandHeart size={36} weight="regular" className="text-accent" />
+          </motion.div>
+
+          <SectionLabel tone="accent">La tua host</SectionLabel>
+          <h2 className="mt-4 font-display text-[clamp(36px,5vw,64px)] font-normal italic leading-[1.06] tracking-[-0.018em] text-white">
+            Parliamo la tua
+            <br />
+            <span className="text-accent not-italic font-medium">lingua</span>.
+          </h2>
+          <p className="mt-8 text-body-l text-white/75 max-w-[620px] mx-auto">
+            Non una reception. Una persona che conosce il quartiere, risponde ai messaggi,
+            aspetta quando serve. L'ospitalità milanese fatta di attenzioni vere.
+          </p>
+        </motion.div>
+
+        {/* Glass cards on dark — THIS is the wow moment */}
+        <motion.ul
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-10% 0px' }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+          }}
+          className="mt-16 grid gap-5 md:grid-cols-3"
+        >
+          {cards.map((c) => (
+            <motion.li
+              key={c.title}
+              variants={{
+                hidden: { opacity: 0, y: reduced ? 0 : 24 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
+              className="glass-on-dark rounded-lg p-7 md:p-8"
             >
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                <HandHeart size={40} weight="regular" className="text-primary" />
-              </div>
-            </motion.div>
-
-            <h2 className="heading-h2 text-neutral-dark mb-5 text-balance">
-              Presente fino a mezzanotte
-            </h2>
-            <p className="body-l text-neutral-dark/75 mb-10 text-balance">
-              Il check-in tardivo non è un problema, è parte della nostra ospitalità.
-              Arriviamo dopo una serata, dopo il treno delle 23 — ti aspettiamo.
-            </p>
-          </RevealSection>
-
-          {/* Detail list */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-            {details.map((d, i) => (
-              <RevealSection key={d.text} delay={i * 0.1}>
-                <div className="flex items-start gap-3 p-4 rounded-md bg-secondary">
-                  <d.icon size={20} weight="regular" className="text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-small text-neutral-dark/80">{d.text}</span>
-                </div>
-              </RevealSection>
-            ))}
-          </div>
-        </div>
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/20 ring-1 ring-accent/40">
+                <c.icon size={20} weight="regular" className="text-accent" />
+              </span>
+              <h3 className="mt-6 font-display text-h2 font-medium text-white">
+                {c.title}
+              </h3>
+              <p className="mt-3 text-body text-white/75">{c.body}</p>
+            </motion.li>
+          ))}
+        </motion.ul>
       </div>
     </section>
   );
