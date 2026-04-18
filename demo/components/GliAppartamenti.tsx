@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { ArrowRight, Bed, Users, WifiHigh, Tree, CookingPot, Drop } from '@phosphor-icons/react/dist/ssr';
 import { SectionLabel } from './ui/SectionLabel';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 const heroPhoto = {
   src: '/photos/balcone_1.jpg',
@@ -80,7 +81,7 @@ export function GliAppartamenti() {
         >
           <motion.div style={{ y: heroY }} className="absolute inset-0">
             <Image
-              src={heroPhoto.src}
+              src={asset(heroPhoto.src)}
               alt={heroPhoto.alt}
               fill
               sizes="(max-width: 1280px) 100vw, 1200px"
@@ -124,7 +125,7 @@ export function GliAppartamenti() {
               className="group relative aspect-[4/3] overflow-hidden rounded-md"
             >
               <Image
-                src={p.src}
+                src={asset(p.src)}
                 alt={p.alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"

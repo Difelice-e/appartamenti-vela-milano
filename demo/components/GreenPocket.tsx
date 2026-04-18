@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { MapPin, Plant, Train, Storefront } from '@phosphor-icons/react/dist/ssr';
 import { SectionLabel } from './ui/SectionLabel';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 const distances = [
   { icon: Train, label: 'Metro Piola', value: '400 m' },
@@ -81,7 +82,7 @@ export function GreenPocket() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg md:aspect-[5/4] lg:aspect-[4/5]">
               <motion.div style={{ y: photoY }} className="absolute inset-0">
                 <Image
-                  src="/photos/balcone_2.jpg"
+                  src={asset('/photos/balcone_2.jpg')}
                   alt="Balcone con piante — angolo verde del cortile"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

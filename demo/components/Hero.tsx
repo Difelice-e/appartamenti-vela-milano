@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { useRef } from 'react';
 import { ArrowDown, ArrowRight } from '@phosphor-icons/react/dist/ssr';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 export function Hero() {
   const reduced = useReducedMotion();
@@ -30,7 +31,7 @@ export function Hero() {
         className="absolute inset-x-0 -z-10"
       >
         <Image
-          src="/photos/camere_2.jpg"
+          src={asset('/photos/camere_2.jpg')}
           alt="Camera matrimoniale degli appartamenti Vela, tende verdi e luce naturale"
           fill
           priority

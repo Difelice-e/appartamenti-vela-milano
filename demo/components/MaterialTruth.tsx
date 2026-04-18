@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { SectionLabel } from './ui/SectionLabel';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 const items = [
   {
@@ -71,7 +72,7 @@ export function MaterialTruth() {
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src={item.photo}
+                  src={asset(item.photo)}
                   alt={item.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"

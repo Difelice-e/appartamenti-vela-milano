@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { HandHeart, Translate, ChatCircleDots, Clock } from '@phosphor-icons/react/dist/ssr';
 import { SectionLabel } from './ui/SectionLabel';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 const cards = [
   {
@@ -39,7 +40,7 @@ export function Ospitalita() {
       {/* Atmospheric dark-green background with subtle plant photo + parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-x-0 -top-[8%] h-[116%] opacity-25">
         <Image
-          src="/photos/balcone_1.jpg"
+          src={asset('/photos/balcone_1.jpg')}
           alt=""
           aria-hidden="true"
           fill

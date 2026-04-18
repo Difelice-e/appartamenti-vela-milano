@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Car, ArrowRight, Shield, Garage as GarageIcon, Key } from '@phosphor-icons/react/dist/ssr';
 import { SectionLabel } from './ui/SectionLabel';
 import { EASE_SOFT_OUT } from '@/lib/motion';
+import { asset } from '@/lib/asset';
 
 const pills = [
   { icon: Shield, label: 'Sicurezza' },
@@ -21,7 +22,7 @@ export function Garage() {
       {/* Background photo */}
       <div className="absolute inset-0 opacity-30">
         <Image
-          src="/photos/parcheggio_1.jpg"
+          src={asset('/photos/parcheggio_1.jpg')}
           alt=""
           fill
           sizes="100vw"
@@ -99,7 +100,7 @@ export function Garage() {
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg md:aspect-[5/4] lg:aspect-[4/5]">
               <Image
-                src="/photos/parcheggio_1.jpg"
+                src={asset('/photos/parcheggio_1.jpg')}
                 alt="Garage privato degli appartamenti Vela, ingresso con auto parcheggiata"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
