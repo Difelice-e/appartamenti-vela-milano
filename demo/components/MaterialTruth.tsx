@@ -22,7 +22,7 @@ const items = [
   {
     photo: '/photos/colazione_1.jpg',
     alt: 'Colazione servita su tavolo in vetro con cornetti e caffè',
-    title: 'Colazione pensata',
+    title: 'Colazione italiana',
     body: 'Cornetti, caffè, succo, biscotti e piccoli piaceri sul tavolo di vetro. Perché la prima cosa della giornata merita un gesto.',
   },
 ];

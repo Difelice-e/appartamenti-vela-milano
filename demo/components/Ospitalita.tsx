@@ -70,7 +70,7 @@ export function Ospitalita() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-10% 0px' }}
             transition={{ duration: 0.7, ease: EASE_SOFT_OUT }}
-            className="mx-auto mb-8 inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 ring-1 ring-accent/30"
+            className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent/15"
           >
             <HandHeart size={36} weight="regular" className="text-accent" />
           </motion.div>

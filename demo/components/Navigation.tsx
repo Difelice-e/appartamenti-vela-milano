@@ -88,13 +88,13 @@ export function Navigation() {
               </a>
               <button
                 type="button"
-                aria-label={open ? 'Chiudi menu' : 'Apri menu'}
+                aria-label="Apri menu"
                 aria-expanded={open}
                 aria-controls={MENU_ID}
-                onClick={() => setOpen(!open)}
-                className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-pill border border-ink/15 bg-white/60"
+                onClick={() => setOpen(true)}
+                className="lg:hidden inline-flex h-11 w-11 items-center justify-center text-ink"
               >
-                {open ? <X size={20} weight="regular" /> : <List size={20} weight="regular" />}
+                <List size={24} weight="regular" />
               </button>
             </div>
           </div>
@@ -115,6 +115,14 @@ export function Navigation() {
             className="fixed inset-0 z-[45] lg:hidden"
           >
             <div className="glass absolute inset-0" />
+            <button
+              type="button"
+              aria-label="Chiudi menu"
+              onClick={() => setOpen(false)}
+              className="absolute right-5 top-4 z-10 inline-flex h-11 w-11 items-center justify-center text-ink"
+            >
+              <X size={24} weight="regular" />
+            </button>
             <div className="relative flex h-full flex-col items-start justify-center gap-6 px-8">
               {links.map((l, i) => (
                 <motion.a

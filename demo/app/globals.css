@@ -180,80 +180,83 @@ body {
 
 /* ==========================================================================
    Button primitives (used inline with Tailwind classes)
+   Declared in @layer components so Tailwind utilities (e.g. `hidden`) win.
    ========================================================================== */
 
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 14px 22px;
-  border-radius: var(--radius-xs);
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: var(--fs-body);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0;
-  border: 1px solid transparent;
-  box-shadow: 0 6px 20px rgba(58, 125, 68, 0.22);
-  transition:
-    background var(--dur-micro) var(--ease-soft-out),
-    transform var(--dur-micro) var(--ease-soft-out),
-    box-shadow var(--dur-micro) var(--ease-soft-out);
-  cursor: pointer;
-}
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 14px 22px;
+    border-radius: var(--radius-xs);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0;
+    border: 1px solid transparent;
+    box-shadow: 0 6px 20px rgba(58, 125, 68, 0.22);
+    transition:
+      background var(--dur-micro) var(--ease-soft-out),
+      transform var(--dur-micro) var(--ease-soft-out),
+      box-shadow var(--dur-micro) var(--ease-soft-out);
+    cursor: pointer;
+  }
 
-.btn-primary:hover {
-  background: var(--color-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 28px rgba(58, 125, 68, 0.28);
-}
+  .btn-primary:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(58, 125, 68, 0.28);
+  }
 
-.btn-primary:active {
-  background: var(--color-primary-pressed);
-  transform: translateY(0);
-}
+  .btn-primary:active {
+    background: var(--color-primary-pressed);
+    transform: translateY(0);
+  }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 14px 22px;
-  border-radius: var(--radius-xs);
-  background: transparent;
-  color: var(--color-neutral-dark);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: var(--fs-body);
-  font-weight: var(--fw-medium);
-  border: 1px solid rgba(31, 42, 36, 0.22);
-  transition: all var(--dur-micro) var(--ease-soft-out);
-  cursor: pointer;
-}
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 14px 22px;
+    border-radius: var(--radius-xs);
+    background: transparent;
+    color: var(--color-neutral-dark);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    border: 1px solid rgba(31, 42, 36, 0.22);
+    transition: all var(--dur-micro) var(--ease-soft-out);
+    cursor: pointer;
+  }
 
-.btn-ghost:hover {
-  background: rgba(31, 42, 36, 0.04);
-  border-color: var(--color-neutral-dark);
-}
+  .btn-ghost:hover {
+    background: rgba(31, 42, 36, 0.04);
+    border-color: var(--color-neutral-dark);
+  }
 
-.btn-accent {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 14px 22px;
-  border-radius: var(--radius-xs);
-  background: var(--color-accent);
-  color: var(--color-neutral-dark);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: var(--fs-body);
-  font-weight: var(--fw-medium);
-  border: 1px solid transparent;
-  transition: all var(--dur-micro) var(--ease-soft-out);
-  cursor: pointer;
-}
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 14px 22px;
+    border-radius: var(--radius-xs);
+    background: var(--color-accent);
+    color: var(--color-neutral-dark);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    border: 1px solid transparent;
+    transition: all var(--dur-micro) var(--ease-soft-out);
+    cursor: pointer;
+  }
 
-.btn-accent:hover {
-  background: var(--color-accent-hover);
-  transform: translateY(-1px);
+  .btn-accent:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 /* ==========================================================================
@@ -274,12 +277,12 @@ body {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--space-5);
+  padding-inline: var(--space-5);
 }
 
 @media (min-width: 768px) {
   .container-vela {
-    padding: 0 var(--space-6);
+    padding-inline: var(--space-6);
   }
 }
 
@@ -287,12 +290,12 @@ body {
   width: 100%;
   max-width: var(--container-hero-max);
   margin: 0 auto;
-  padding: 0 var(--space-5);
+  padding-inline: var(--space-5);
 }
 
 @media (min-width: 768px) {
   .container-hero {
-    padding: 0 var(--space-8);
+    padding-inline: var(--space-8);
   }
 }
 

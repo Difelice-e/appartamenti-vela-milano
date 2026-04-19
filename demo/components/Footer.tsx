@@ -16,7 +16,7 @@ const legalLinks = [
 export function Footer() {
   return (
     <footer className="bg-ink text-white/80">
-      <div className="container-vela py-16 lg:py-20">
+      <div className="container-vela py-20 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Brand */}
           <div className="lg:col-span-5">
