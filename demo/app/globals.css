@@ -338,3 +338,34 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Vela chatbot (FAB + modal)
+   ========================================================================== */
+
+@keyframes vela-modal-in {
+  0%   { opacity: 0; transform: translateY(16px) scale(0.96); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);  }
+}
+@keyframes vela-modal-out {
+  0%   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);  }
+  100% { opacity: 0; transform: translateY(12px) scale(0.97); filter: blur(4px); }
+}
+@keyframes vela-msg-in {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes vela-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 181, 126, 0.45), 0 18px 60px -12px rgba(232, 181, 126, 0.35); }
+  50%      { box-shadow: 0 0 0 10px rgba(232, 181, 126, 0),   0 18px 60px -12px rgba(232, 181, 126, 0.55); }
+}
+
+.vela-modal-open  { animation: vela-modal-in  0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.vela-modal-close { animation: vela-modal-out 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+.vela-msg         { animation: vela-msg-in    0.4s  cubic-bezier(0.16, 1, 0.3, 1) both; }
+.vela-fab-glow    { animation: vela-glow      2.6s  ease-in-out infinite; }
+
+.vela-scroll::-webkit-scrollbar          { width: 6px; }
+.vela-scroll::-webkit-scrollbar-track    { background: transparent; }
+.vela-scroll::-webkit-scrollbar-thumb    { background: rgba(245, 245, 247, 0.08); border-radius: 999px; }
+.vela-scroll::-webkit-scrollbar-thumb:hover { background: rgba(232, 181, 126, 0.35); }
